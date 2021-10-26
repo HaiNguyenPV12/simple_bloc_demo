@@ -1,0 +1,5 @@
+{
+    "ENV": "production",
+    "HOST_NAME": "jsonplaceholder.typicode.com",
+    "ALBUM_PATH": "/photos"
+}
