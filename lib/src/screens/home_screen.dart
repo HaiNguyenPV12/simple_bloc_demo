@@ -10,7 +10,7 @@ import '../widgets/album_card.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AlbumBloc>(context).add(AlbumRequested());
+    context.read<AlbumBloc>().add(AlbumRequested());
     return Scaffold(
       appBar: AppBar(
         title: Text(constants.HomeScreen.appBarTitle),

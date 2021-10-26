@@ -27,16 +27,6 @@ main() {
       build: () => AlbumBloc(), expect: () => []);
 
   blocTest(
-    'emits [AlbumLoadFailure] when invalid event is called',
-    build: () {
-      albumService = MockAlbumService();
-      return AlbumBloc(service: albumService);
-    },
-    act: (AlbumBloc bloc) => bloc.add(MockAlbumEvent()),
-    expect: () => [AlbumLoadFailure()],
-  );
-
-  blocTest(
     'emits [AlbumLoadInProgress] then [AlbumLoadSucess] when [AlbumRequested] is called',
     build: () {
       albumService = MockAlbumService();
