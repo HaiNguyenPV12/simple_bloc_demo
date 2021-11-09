@@ -23,6 +23,7 @@ main() {
       ),
     ),
   );
+
   testWidgets('Should render card with title', (tester) async {
     await tester.pumpWidget(widget);
 
