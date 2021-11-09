@@ -34,16 +34,6 @@ main() {
     expect(albumTitleFinder, findsOneWidget);
   });
 
-  testWidgets('Should render card with title - duplicated', (tester) async {
-    await tester.pumpWidget(widget);
-
-    final albumCardFinder = find.byType(AlbumCard);
-    final albumTitleFinder =
-        find.descendant(of: albumCardFinder, matching: find.text(albumTitle));
-
-    expect(albumTitleFinder, findsOneWidget);
-  });
-
   testWidgets('Should render grey card on big screen', (tester) async {
     tester.binding.window.physicalSizeTestValue = Size(2000, 500);
     addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
