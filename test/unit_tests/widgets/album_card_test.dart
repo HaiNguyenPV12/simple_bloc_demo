@@ -23,7 +23,18 @@ main() {
       ),
     ),
   );
+
   testWidgets('Should render card with title', (tester) async {
+    await tester.pumpWidget(widget);
+
+    final albumCardFinder = find.byType(AlbumCard);
+    final albumTitleFinder =
+        find.descendant(of: albumCardFinder, matching: find.text(albumTitle));
+
+    expect(albumTitleFinder, findsOneWidget);
+  });
+
+  testWidgets('Should render card with title - duplicated', (tester) async {
     await tester.pumpWidget(widget);
 
     final albumCardFinder = find.byType(AlbumCard);
