@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:simple_bloc_demo/src/blocs/album/album_bloc.dart';
 import 'package:simple_bloc_demo/src/blocs/album/album_event.dart';
 import 'package:simple_bloc_demo/src/blocs/album/album_state.dart';
@@ -21,19 +21,20 @@ main() {
   blocTest(
     'emits [AlbumLoadInProgress] then [AlbumLoadSucess] when [AlbumRequested] is called',
     build: () {
+      when(() => albumService.fetchAlbum()).thenAnswer((_) async => []);
       return AlbumBloc(service: albumService);
     },
     act: (AlbumBloc bloc) => bloc.add(AlbumRequested()),
     expect: () => [
       AlbumLoadInProgress(),
-      AlbumLoadSucess(),
+      AlbumLoadSucess(albums: []),
     ],
   );
 
   blocTest(
     'emits [AlbumLoadFailure] when [AlbumRequested] is called and service throws error.',
     build: () {
-      when(albumService.fetchAlbum()).thenThrow(Exception());
+      when(() => albumService.fetchAlbum()).thenThrow(Exception());
       return AlbumBloc(service: albumService);
     },
     act: (AlbumBloc bloc) => bloc.add(AlbumRequested()),

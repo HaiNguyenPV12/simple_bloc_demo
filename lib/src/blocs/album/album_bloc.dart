@@ -11,11 +11,12 @@ class AlbumBloc extends Bloc<AlbumEvent, AlbumState> {
     on<AlbumRequested>((event, emit) async {
       try {
         emit(AlbumLoadInProgress());
+        final albums = await service.fetchAlbum();
 
         // Forced delay for demo
         // await Future.delayed(const Duration(seconds: 2));
 
-        emit(AlbumLoadSucess(albums: await service.fetchAlbum()));
+        emit(AlbumLoadSucess(albums: albums));
       } catch (e) {
         emit(AlbumLoadFailure(errorMessage: e.toString()));
       }
