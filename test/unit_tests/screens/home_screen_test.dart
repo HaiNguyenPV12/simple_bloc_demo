@@ -92,6 +92,17 @@ main() {
     });
 
     testWidgets(
+        'Should render orange container when Bloc emits uncovered state',
+        (tester) async {
+      when(() => albumBloc.state).thenReturn(FakeAlbumState());
+      await tester.pumpWidget(widget);
+      await tester.pump();
+
+      expect((tester.widget(find.byType(Container)) as Container).color,
+          Colors.orange);
+    });
+
+    testWidgets(
         'Should render AlbumCard list when bloc state is [AlbumLoadSucess]',
         (tester) async {
       when(() => albumBloc.state).thenReturn(AlbumLoadSucess(
