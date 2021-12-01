@@ -30,15 +30,20 @@ class HomeScreen extends StatelessWidget {
             );
           }
           if (state is AlbumLoadSucess) {
-            return ListView(
-              children: [
-                for (var album in state.albums!)
-                  Center(
-                    child: AlbumCard(
-                      album: album,
-                    ),
-                  )
-              ],
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<AlbumBloc>().add(AlbumRequested());
+              },
+              child: ListView(
+                children: [
+                  for (var album in state.albums!)
+                    Center(
+                      child: AlbumCard(
+                        album: album,
+                      ),
+                    )
+                ],
+              ),
             );
           }
           return Container(
