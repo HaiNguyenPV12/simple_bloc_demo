@@ -105,5 +105,24 @@ main() {
 
       expect(albumCardFinder, findsWidgets);
     });
+
+    testWidgets('Should call [AlbumRequested] on list drag down at top',
+        (tester) async {
+      when(() => albumBloc.state).thenReturn(AlbumLoadSucess(
+          albums: List<Album>.from(
+              mockResponse.map((model) => Album.fromJson(model)))));
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      final albumCardFinder = find.descendant(
+          of: find.byType(ListView), matching: find.byType(AlbumCard));
+
+      expect(albumCardFinder, findsWidgets);
+
+      await tester.drag(albumCardFinder.first, Offset(0, 500));
+      await tester.pumpAndSettle();
+
+      verify(() => albumBloc.add(AlbumRequested())).called(2);
+    });
   });
 }

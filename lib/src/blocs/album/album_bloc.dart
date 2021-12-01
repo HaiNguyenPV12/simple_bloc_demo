@@ -5,9 +5,9 @@ import 'album_event.dart';
 import 'album_state.dart';
 
 class AlbumBloc extends Bloc<AlbumEvent, AlbumState> {
-  final AlbumService? service;
+  final AlbumService service;
 
-  AlbumBloc({this.service}) : super(AlbumInitial()) {
+  AlbumBloc({required this.service}) : super(AlbumInitial()) {
     on<AlbumRequested>((event, emit) async {
       try {
         emit(AlbumLoadInProgress());
@@ -15,7 +15,7 @@ class AlbumBloc extends Bloc<AlbumEvent, AlbumState> {
         // Forced delay for demo
         // await Future.delayed(const Duration(seconds: 2));
 
-        emit(AlbumLoadSucess(albums: await service!.fetchAlbum()));
+        emit(AlbumLoadSucess(albums: await service.fetchAlbum()));
       } catch (e) {
         emit(AlbumLoadFailure(errorMessage: e.toString()));
       }
