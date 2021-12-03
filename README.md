@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/HaiNguyenPV12/simple_bloc_demo/branch/master/graph/badge.svg?token=RDJU7PM7ST)](https://codecov.io/gh/HaiNguyenPV12/simple_bloc_demo)
+
 # simple_bloc_demo
 
 ## Getting Started
